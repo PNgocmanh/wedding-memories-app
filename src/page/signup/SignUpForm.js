@@ -5,6 +5,36 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import * as Auth from "./SignUp.styles";
 import { Link } from "react-router-dom";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { message, Upload, Modal } from "antd";
+import ImgCrop from "antd-img-crop";
+
+const getBase64 = (img, callback) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
+};
+
+const getBase64ForPreView = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+const beforeUpload = (file) => {
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  if (!isJpgOrPng) {
+    message.error("You can only upload JPG/PNG file!");
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error("Image must smaller than 2MB!");
+  }
+  return isJpgOrPng && isLt2M;
+  // return isJpgOrPng;
+};
 
 const SignUpForm = () => {
   const [form] = Form.useForm();
@@ -14,11 +44,57 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoading(true);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [imageUrl, setImageUrl] = useState();
+  const [loading, setLoading] = useState(false);
+  const [fileList, setFileList] = useState([]);
+  const handleCancel = () => setPreviewOpen(false);
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64ForPreView(file.originFileObj);
+    }
+    console.log(file);
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
   };
+  // const handleChange = (info) => {
+  //   if (info.file.status === 'uploading') {
+  //     setLoading(true);
+  //     return;
+  //   }
+  //   if (info.file.status === 'done') {
+  //     // Get this url from response in real world.
+  //     getBase64(info.file.originFileObj, (url) => {
+  //       setImageUrl(url);
+  //       setLoading(false);
+  //     });
+  //   }
+  // };
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+  const uploadButton = (
+    <button
+      style={{
+        border: 0,
+        background: "none",
+        color: "black",
+      }}
+      type="button"
+    >
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div
+        style={{
+          marginTop: 8,
+          color: "black",
+        }}
+      >
+        Upload Avatar
+      </div>
+    </button>
+  );
 
   const onFinish = (values) => {
+    setIsLoading(true);
     console.log("Received values of form: ", values);
   };
 
@@ -45,12 +121,67 @@ const SignUpForm = () => {
       <Form.Item
         name="password"
         label={<Auth.LabelHeading>Password</Auth.LabelHeading>}
-        rules={[{ required: true, message: "Please input your Password!" }]}
+        rules={[{ required: true, message: "This field is required!" }]}
       >
         <Auth.FormInputPassword
           prefix={<LockOutlined className="site-form-item-icon" />}
           placeholder="Password"
         />
+      </Form.Item>
+      <Form.Item
+        name="confirm-password"
+        label={<Auth.LabelHeading>Confirm Password</Auth.LabelHeading>}
+        rules={[{ required: true, message: "This field is required!" }]}
+      >
+        <Auth.FormInputPassword
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          placeholder="Confirm Password"
+        />
+      </Form.Item>
+      <Form.Item
+      name="image"
+        label={<Auth.LabelHeading>Avatar</Auth.LabelHeading>}
+        rules={[{ required: true, message: "This field is required!" }]}
+      >
+        <ImgCrop rotationSlider showReset showGrid>
+          <Upload
+            action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+            listType="picture-card"
+            name="avatar"
+            fileList={fileList}
+            // showUploadList={false}
+            onPreview={handlePreview}
+            onChange={handleChange}
+            beforeUpload={beforeUpload}
+          >
+            {fileList.length >= 1 ? null : uploadButton}
+            {/* {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                }}
+              />
+            ) : (
+              uploadButton
+            )} */}
+          </Upload>
+        </ImgCrop>
+        <Modal
+          open={previewOpen}
+          title="Your Avatar"
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <img
+            alt="example"
+            style={{
+              width: "100%",
+            }}
+            src={previewImage}
+          />
+        </Modal>
       </Form.Item>
       <Auth.ActionsWrapper>
         <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -59,11 +190,7 @@ const SignUpForm = () => {
         <Link to="/login">You have an account?</Link>
       </Auth.ActionsWrapper>
       <Form.Item noStyle>
-        <Auth.SubmitButton
-          type="primary"
-          htmlType="submit"
-          loading={isLoading}
-        >
+        <Auth.SubmitButton type="primary" htmlType="submit" loading={isLoading}>
           Sign Up {""}
         </Auth.SubmitButton>
       </Form.Item>

@@ -18,10 +18,23 @@
 //   </LoaderWrapper>
 // );
 
-const Loader = () => (
-  <p>
-    Loading
-  </p>
-);
+import React from "react";
+import { Spin } from "antd";
+
+const Loader = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        height: '100vh', // Full viewport height
+      }}
+    >
+      <Spin size="large" />
+    </div>
+  );
+};
 
 export default Loader;

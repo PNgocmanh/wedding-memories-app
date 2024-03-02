@@ -9,7 +9,9 @@ const Login = () => {
       <Auth.Container>
         {/* <Col span={4}> */}
           <Card style={{
-              width: 400,
+              // width: 500,
+              height: 500,
+              overflow: 'auto'
             }}
           >
             <SignUpForm />

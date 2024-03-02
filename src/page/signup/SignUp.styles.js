@@ -9,13 +9,14 @@ export const BackgroundWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  background: var(--background-color);
 `
 
 export const Container = styled(Row)({
   display: 'flex',
   flexDirection : 'column',
-  alignItems: 'center'
-  
+  alignItems: 'center',
 })
 
 export const FormTitle = styled.div`

@@ -1,0 +1,18 @@
+@keyframes snowflake-fall {
+  0% {
+    transform: translateY(-6vh);
+  }
+  100% {
+    transform: translateY(96vh);
+  }
+}
+
+.flake {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 1px 1px black;
+  animation: snowflake-fall linear infinite;
+}

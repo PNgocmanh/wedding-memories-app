@@ -14,12 +14,12 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoading(true);
-  };
-
   const onFinish = (values) => {
+    setIsLoading(true)
     console.log("Received values of form: ", values);
+    setIsLoading(false)
+    navigate('/')
+    
   };
 
   return (
@@ -35,7 +35,7 @@ const LoginForm = () => {
       <Form.Item
         name="username"
         label={<Auth.LabelHeading>Username</Auth.LabelHeading>}
-        rules={[{ required: true, message: "Please input your Username!" }]}
+        rules={[{ required: true, message: "This field is required!" }]}
       >
         <Auth.FormInput
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -45,7 +45,7 @@ const LoginForm = () => {
       <Form.Item
         name="password"
         label={<Auth.LabelHeading>Password</Auth.LabelHeading>}
-        rules={[{ required: true, message: "Please input your Password!" }]}
+        rules={[{ required: true, message: "This field is required!" }]}
       >
         <Auth.FormInputPassword
           prefix={<LockOutlined className="site-form-item-icon" />}
