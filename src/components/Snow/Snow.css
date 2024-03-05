@@ -14,5 +14,6 @@
   background-color: #ffffff;
   border-radius: 50%;
   box-shadow: 1px 1px black;
+  z-index: 100;
   animation: snowflake-fall linear infinite;
 }

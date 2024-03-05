@@ -9,8 +9,6 @@ import { ConfigProvider } from "antd";
 import { useEffect, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Snow from "./components/Snow";
-import Footer from "./components/footer";
-import Header from "./components/header";
 
 function App() {
   const theme = "dark";
@@ -23,7 +21,6 @@ function App() {
         <ConfigProvider>
           <BrowserRouter>
             <RouterDom />
-            <Footer />
           </BrowserRouter>
         </ConfigProvider>
       </HelmetProvider>

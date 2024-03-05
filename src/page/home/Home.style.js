@@ -11,9 +11,42 @@ export const Container = styled.div`
 
 export const BoxContent = styled.div`
   width: 100%;
+  /* height: 100vh; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  background: yellow;
+`
+
+export const BoxIntroduce = styled.div`
+  width: 100%;
   height: 200px;
+  background: blue;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: yellow;
 `
+
+export const ContentWrapper = styled.div`
+  width: 100%;
+  background: white;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+`
+
+export const ContentTitleWrapper = styled.div`
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  display: inline-block;
+  background: gray;
+`
+
+export const ContentBodyWrapper = styled.div`
+  width: 100%;
+  /* height: 100px; */
+  text-align: center;
+  display: inline-block;
+`
+
