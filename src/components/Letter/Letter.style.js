@@ -55,7 +55,6 @@ export const ImageBoxBorder = styled.div`
 `;
 
 export const BoxContent = styled.div`
-  background: yellow;
   width: 500px;
   height: 500px;
   @media screen and (max-width: 600px) {
@@ -109,14 +108,18 @@ export const BoxTitle1 = styled.div`
 `;
 
 export const BoxTriagle = styled.div`
-  background-color: white;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
   width: 30px;
   height: 30px;
   position: absolute;
   z-index: 3;
-  rotate: -90deg;
   margin: 30px 22px;
+  background-color: white;
+  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  box-shadow: 0px 0px 0px 50px;
+  transform: rotate(-90deg);
+  /* box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5); */
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; */
 `;
 
 export const BoxTriagle1 = styled.div`
@@ -136,7 +139,7 @@ export const BoxTextWrapper = styled.div`
   align-items: center;
 `;
 
-export const BoxText = styled.div`
+export const BoxText = styled.p`
   font-size: 16px;
   background-color: white;
   border-radius: 10px;
@@ -144,6 +147,23 @@ export const BoxText = styled.div`
   text-align: left;
   padding: 20px;
   margin: 0px 50px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  position: relative;
+  &:after{
+    content: "";
+    position: absolute;
+    right: initial;
+    top: 22px;
+    left: -22px;
+    /* width: 0;
+    height: 0; */
+    border-style: solid;
+    background-color: red;
+    border-width: 50px 0 50px 50px; /* Chiều cao và chiều dài của tam giác */
+    border-color: transparent transparent transparent #fff; /* Màu của tam giác */
+    transform: rotate(180deg);
+    text-shadow: 20px 0px 24px #eee;
+  }
 `;
 
 export const BoxText1 = styled.div`

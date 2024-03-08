@@ -7,6 +7,8 @@ import MusicButton from "../../components/MusicButton";
 import MenuButton from "../../components/MenuButton";
 import SliderImage from "../../components/SlideImage";
 import Letter from "../../components/Letter";
+import Footer from "../../components/footer";
+import Album from "../../components/Album";
 
 export default function HomePage() {
   const musicUrl = [
@@ -16,6 +18,14 @@ export default function HomePage() {
   const { isTablet, isDesktop } = useResponsive();
   const navigate = useNavigate();
   const content = [];
+  const album = [
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505281/samples/dessert-on-a-plate.jpg",
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505281/samples/cup-on-a-table.jpg",
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505278/samples/outdoor-woman.jpg",
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505275/samples/balloons.jpg",
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505258/samples/ecommerce/car-interior-design.jpg",
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505255/samples/animals/three-dogs.jpg"
+  ]
 
   const desktopView = (
     <Home.BoxContent>
@@ -40,7 +50,12 @@ export default function HomePage() {
         {/* {isDesktop ? desktopView : mobileView} */}
         <Home.BoxContent>
           <Home.BoxIntroduce>
-            <>Hình cô dâu chú rể</>
+            <Home.BoxIntroduceTitle>
+              Cô dâu & Chú rễ
+            </Home.BoxIntroduceTitle>
+            <Home.BoxIntroduceBody>
+              Hình đám cưới + cô dâu + chú rễ
+            </Home.BoxIntroduceBody>
           </Home.BoxIntroduce>
           <Home.ContentWrapper>
             <Home.ContentTitleWrapper>
@@ -51,12 +66,21 @@ export default function HomePage() {
               <Letter content={content} position={1} />
             </Home.ContentBodyWrapper>
           </Home.ContentWrapper>
+          <Home.AlbumWrapper>
+            <Home.AlbumTitleWrapper>
+              Album hình cưới
+            </Home.AlbumTitleWrapper>
+            <Home.AlbumBodyWrapper>
+              <Album data={album} />
+            </Home.AlbumBodyWrapper>
+          </Home.AlbumWrapper>
         </Home.BoxContent>
         <div
           style={{ width: "100%", height: "200px", background: "black" }}
         ></div>
         <MusicButton musicUrl={musicUrl} />
         <MenuButton />
+        <Footer />
       </Home.Container>
     </>
   );

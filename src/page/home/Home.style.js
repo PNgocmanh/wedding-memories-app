@@ -15,13 +15,32 @@ export const BoxContent = styled.div`
   /* display: flex;
   justify-content: center;
   align-items: center; */
-  background: yellow;
+  /* background: yellow; */
 `
 
 export const BoxIntroduce = styled.div`
   width: 100%;
-  height: 200px;
+  /* height: 200px; */
   background: blue;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+`
+
+export const BoxIntroduceTitle = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: gray;
+`
+
+export const BoxIntroduceBody = styled.div`
+  width: 100%;
+  height: 200px;
+  background: red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +58,10 @@ export const ContentTitleWrapper = styled.div`
   width: 100%;
   height: 100px;
   text-align: center;
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: gray;
 `
 
@@ -50,3 +72,28 @@ export const ContentBodyWrapper = styled.div`
   display: inline-block;
 `
 
+export const AlbumWrapper = styled.div`
+  width: 100%;
+  padding: 100px 0px;
+`
+
+export const AlbumTitleWrapper = styled.div`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  background: red;
+`
+
+export const AlbumBodyWrapper = styled.div`
+  /* width: 100%; */
+  margin:  0px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 600px) {
+    margin: 0px 8px;
+  }
+`

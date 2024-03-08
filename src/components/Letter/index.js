@@ -41,7 +41,7 @@ export default function Letter({ content, position }) {
           </S.BoxTitleItem>
           <S.BoxTitleDay>05/03/2024</S.BoxTitleDay>
         </S.BoxTitle>
-        {isDesktop && <Triangle position={position} />}
+        {/* {isDesktop && <Triangle position={position} />} */}
         <S.BoxText>
           Tôi đã từng không tin vào tình yêu online. Đã từng nghĩ làm sao có thể
           thích một người chưa từng gặp mặt? Vậy mà giờ đây tôi lại đang như
