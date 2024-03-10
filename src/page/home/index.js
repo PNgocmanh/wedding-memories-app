@@ -1,4 +1,4 @@
-import { Col, Divider, Row, Button } from "antd";
+import { Col, Divider, Row, Button, Image } from "antd";
 import React, { useEffect } from "react";
 import { useResponsive } from "../../hooks/useResponsive";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,8 @@ import SliderImage from "../../components/SlideImage";
 import Letter from "../../components/Letter";
 import Footer from "../../components/footer";
 import Album from "../../components/Album";
+import image1 from "../../assets/images/7500549.png";
+import IntroImage from "../../assets/images/intro.png";
 
 export default function HomePage() {
   const musicUrl = [
@@ -24,8 +26,8 @@ export default function HomePage() {
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505278/samples/outdoor-woman.jpg",
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505275/samples/balloons.jpg",
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505258/samples/ecommerce/car-interior-design.jpg",
-    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505255/samples/animals/three-dogs.jpg"
-  ]
+    "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505255/samples/animals/three-dogs.jpg",
+  ];
 
   const desktopView = (
     <Home.BoxContent>
@@ -47,14 +49,22 @@ export default function HomePage() {
     <>
       <Home.Container>
         <SliderImage />
-        {/* {isDesktop ? desktopView : mobileView} */}
         <Home.BoxContent>
           <Home.BoxIntroduce>
-            <Home.BoxIntroduceTitle>
-              Cô dâu & Chú rễ
-            </Home.BoxIntroduceTitle>
+            <Home.BoxIntroduceTitle>Cô dâu & Chú rễ</Home.BoxIntroduceTitle>
             <Home.BoxIntroduceBody>
-              Hình đám cưới + cô dâu + chú rễ
+              <div>
+                <Home.BrideImage src={image1} alt="Bride" />
+                <Home.BrideName>Bùi Hà Phước Uyên</Home.BrideName>
+              </div>
+                <Home.IntroImage
+                  src={IntroImage}
+                  alt="intro_image"
+                />
+              <div>
+                <Home.GroomImage src={image1} alt="Groom" />
+                <Home.GroomName>Trần Cảnh Đức</Home.GroomName>
+              </div>
             </Home.BoxIntroduceBody>
           </Home.BoxIntroduce>
           <Home.ContentWrapper>
@@ -67,9 +77,7 @@ export default function HomePage() {
             </Home.ContentBodyWrapper>
           </Home.ContentWrapper>
           <Home.AlbumWrapper>
-            <Home.AlbumTitleWrapper>
-              Album hình cưới
-            </Home.AlbumTitleWrapper>
+            <Home.AlbumTitleWrapper>Album hình cưới</Home.AlbumTitleWrapper>
             <Home.AlbumBodyWrapper>
               <Album data={album} />
             </Home.AlbumBodyWrapper>

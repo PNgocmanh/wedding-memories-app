@@ -51,7 +51,6 @@ export const ImageBoxBorder = styled.div`
     width: 350px;
     height: 350px;
   }
-  
 `;
 
 export const BoxContent = styled.div`
@@ -118,8 +117,6 @@ export const BoxTriagle = styled.div`
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
   box-shadow: 0px 0px 0px 50px;
   transform: rotate(-90deg);
-  /* box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5); */
-  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; */
 `;
 
 export const BoxTriagle1 = styled.div`
@@ -139,49 +136,71 @@ export const BoxTextWrapper = styled.div`
   align-items: center;
 `;
 
-export const BoxText = styled.p`
+export const BoxText = styled.div`
+  position: relative;
   font-size: 16px;
+  box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
   width: 400px;
   text-align: left;
   padding: 20px;
   margin: 0px 50px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-  position: relative;
-  &:after{
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+  &::after {
     content: "";
     position: absolute;
-    right: initial;
+    width: 0;
+    height: 0;
+    left: 0px;
     top: 22px;
-    left: -22px;
-    /* width: 0;
-    height: 0; */
-    border-style: solid;
-    background-color: red;
-    border-width: 50px 0 50px 50px; /* Chiều cao và chiều dài của tam giác */
-    border-color: transparent transparent transparent #fff; /* Màu của tam giác */
-    transform: rotate(180deg);
-    text-shadow: 20px 0px 24px #eee;
+    box-sizing: border-box;
+    border: 13px solid black;
+    border-color: transparent transparent #fff #fff;
+
+    transform-origin: 0 0;
+    transform: rotate(45deg);
+    box-shadow: -3px 3px 3px 0px #eee;
   }
 `;
 
 export const BoxText1 = styled.div`
+  position: relative;
   font-size: 16px;
+  box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
   width: 400px;
   text-align: right;
   padding: 20px;
-  margin: 0px 10px;
-  @media screen and (max-width: 600px) {
-    width: 350px;
-    height: auto;
-    text-align: center;
-    margin: 10px 10px 16px 10px;
-    border: 1px solid black;
-    background-color: red;
+  margin: 0px 50px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -25px;
+    top: 55px;
+    box-sizing: border-box;
+    border: 13px solid black;
+    border-color: transparent transparent #fff #fff;
+    transform-origin: 0 0;
+    transform: rotate(-135deg);
+    box-shadow: -3px 3px 3px 0px #eee;
   }
+`;
+
+export const BoxTextMobile = styled.div`
+  font-size: 16px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  height: auto;
+  text-align: center;
+  padding: 20px;
+  margin: 10px 10px 16px 10px;
 `;
 
 export const DividerContent = styled(Divider)`
