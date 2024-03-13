@@ -68,20 +68,21 @@ export const BoxContent = styled.div`
 
 export const BoxTitle = styled.div`
   text-align: left;
-  border: 1px solid red;
   margin-top: 30px;
   margin-left: 20px;
   margin-bottom: 15px;
-`;
+  `;
 
 export const BoxTitleItem = styled.div`
   display: inline-block;
   margin-right: 15px;
+  font-family: 'Shantell Sans', cursive;
 `;
 
 export const BoxTitleItem1 = styled.div`
   display: inline-block;
   margin-left: 15px;
+  font-family: 'Shantell Sans', cursive;
 `;
 
 export const BoxTitleDay = styled.div`
@@ -96,7 +97,6 @@ export const BoxTitleDay1 = styled.div`
 
 export const BoxTitle1 = styled.div`
   text-align: right;
-  border: 1px solid red;
   margin-top: 30px;
   margin-right: 20px;
   margin-bottom: 15px;
@@ -104,30 +104,6 @@ export const BoxTitle1 = styled.div`
     text-align: center;
     margin: 0px;
   }
-`;
-
-export const BoxTriagle = styled.div`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  z-index: 3;
-  margin: 30px 22px;
-  background-color: white;
-  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  box-shadow: 0px 0px 0px 50px;
-  transform: rotate(-90deg);
-`;
-
-export const BoxTriagle1 = styled.div`
-  background-color: white;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  z-index: 3;
-  rotate: 90deg;
-  margin: 30px 448px;
 `;
 
 export const BoxTextWrapper = styled.div`
@@ -138,11 +114,12 @@ export const BoxTextWrapper = styled.div`
 
 export const BoxText = styled.div`
   position: relative;
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
   width: 400px;
+  min-height: 80px;
   text-align: left;
   padding: 20px;
   margin: 0px 50px;
@@ -157,7 +134,6 @@ export const BoxText = styled.div`
     box-sizing: border-box;
     border: 13px solid black;
     border-color: transparent transparent #fff #fff;
-
     transform-origin: 0 0;
     transform: rotate(45deg);
     box-shadow: -3px 3px 3px 0px #eee;
@@ -166,11 +142,12 @@ export const BoxText = styled.div`
 
 export const BoxText1 = styled.div`
   position: relative;
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
   width: 400px;
+  min-height: 80px;
   text-align: right;
   padding: 20px;
   margin: 0px 50px;

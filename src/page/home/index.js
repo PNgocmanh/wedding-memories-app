@@ -1,5 +1,5 @@
-import { Col, Divider, Row, Button, Image } from "antd";
-import React, { useEffect } from "react";
+import { Col, Divider, Row, Button, Image, Empty, Skeleton } from "antd";
+import React, { useEffect, useState } from "react";
 import { useResponsive } from "../../hooks/useResponsive";
 import { useNavigate } from "react-router-dom";
 import * as Home from "./Home.style";
@@ -9,8 +9,12 @@ import SliderImage from "../../components/SlideImage";
 import Letter from "../../components/Letter";
 import Footer from "../../components/footer";
 import Album from "../../components/Album";
-import image1 from "../../assets/images/7500549.png";
+import groomimage from "../../assets/images/groom.png";
+import brideimage from "../../assets/images/bride.png"
 import IntroImage from "../../assets/images/intro.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMemories } from "../../redux/actions/memoriesAction";
+import CountdownTimer from "../../components/Timer";
 
 export default function HomePage() {
   const musicUrl = [
@@ -19,7 +23,9 @@ export default function HomePage() {
   ];
   const { isTablet, isDesktop } = useResponsive();
   const navigate = useNavigate();
-  const content = [];
+  const dispatch = useDispatch();
+  const content = useSelector((state) => state.memories.post);
+  const isLoading = useSelector((state) => state.memories.isLoading);
   const album = [
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505281/samples/dessert-on-a-plate.jpg",
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505281/samples/cup-on-a-table.jpg",
@@ -28,6 +34,8 @@ export default function HomePage() {
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505258/samples/ecommerce/car-interior-design.jpg",
     "https://res.cloudinary.com/dbd0yztdb/image/upload/v1705505255/samples/animals/three-dogs.jpg",
   ];
+
+  const [reload, setReload] = useState(false);
 
   const desktopView = (
     <Home.BoxContent>
@@ -42,8 +50,8 @@ export default function HomePage() {
   );
 
   useEffect(() => {
-    console.log("Home");
-  }, []);
+    dispatch(getAllMemories());
+  }, [dispatch, reload]);
 
   return (
     <>
@@ -51,44 +59,74 @@ export default function HomePage() {
         <SliderImage />
         <Home.BoxContent>
           <Home.BoxIntroduce>
-            <Home.BoxIntroduceTitle>Cô dâu & Chú rễ</Home.BoxIntroduceTitle>
+            <div>
+
+              <CountdownTimer />
+            </div>
+            {/* <Home.BoxIntroduceTitle>Cô dâu & Chú rễ</Home.BoxIntroduceTitle> */}
             <Home.BoxIntroduceBody>
               <div>
-                <Home.BrideImage src={image1} alt="Bride" />
+                <Home.BrideImage src={brideimage} alt="Bride" />
                 <Home.BrideName>Bùi Hà Phước Uyên</Home.BrideName>
               </div>
-                <Home.IntroImage
-                  src={IntroImage}
-                  alt="intro_image"
-                />
+              <Home.IntroImage src={IntroImage} alt="intro_image" />
               <div>
-                <Home.GroomImage src={image1} alt="Groom" />
+                <Home.GroomImage src={groomimage} alt="Groom" />
                 <Home.GroomName>Trần Cảnh Đức</Home.GroomName>
               </div>
             </Home.BoxIntroduceBody>
           </Home.BoxIntroduce>
           <Home.ContentWrapper>
             <Home.ContentTitleWrapper>
-              <p>HomePage</p>
+              <p>Những câu chuyện nhỏ</p>
             </Home.ContentTitleWrapper>
             <Home.ContentBodyWrapper>
-              <Letter content={content} position={0} />
-              <Letter content={content} position={1} />
+              {isLoading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {/* <Skeleton.Image style={{ width: "300px", height: "300px" }} /> */}
+                  <Skeleton />
+                </div>
+              ) : (
+                <>
+                  {content.length === 0 && (
+                    <div
+                      style={{
+                        height: "300px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Empty />
+                    </div>
+                  )}
+                  {content?.map((item, index) => (
+                    <div key={item?.id}>
+                      <Letter content={item} position={index} />
+                    </div>
+                  ))}
+                </>
+              )}
             </Home.ContentBodyWrapper>
           </Home.ContentWrapper>
-          <Home.AlbumWrapper>
+          {/* <Home.AlbumWrapper>
             <Home.AlbumTitleWrapper>Album hình cưới</Home.AlbumTitleWrapper>
             <Home.AlbumBodyWrapper>
               <Album data={album} />
             </Home.AlbumBodyWrapper>
-          </Home.AlbumWrapper>
-        </Home.BoxContent>
+          </Home.AlbumWrapper> */}
         <div
           style={{ width: "100%", height: "200px", background: "black" }}
         ></div>
+        </Home.BoxContent>
         <MusicButton musicUrl={musicUrl} />
-        <MenuButton />
-        <Footer />
+        <MenuButton reload={reload} setReload={setReload} />
       </Home.Container>
     </>
   );

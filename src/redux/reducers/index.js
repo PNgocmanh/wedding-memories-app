@@ -3,7 +3,7 @@ import post from "./post";
 import user from "./user";
 
 const reducers = combineReducers({
-  post: post,
+  memories: post,
   user: user
 });
 

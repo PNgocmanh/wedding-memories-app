@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import * as Auth from "./Login.styles";
 import { Link } from "react-router-dom";
+import { login } from "../../redux/actions/userAction";
 
 const LoginForm = () => {
   const [form] = Form.useForm();
@@ -15,11 +16,10 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onFinish = (values) => {
-    setIsLoading(true)
-    console.log("Received values of form: ", values);
-    setIsLoading(false)
-    navigate('/')
-    
+    setIsLoading(true);
+    console.log("Received values of form: ", values.username);
+    dispatch(login(values, navigate));
+    setIsLoading(false);
   };
 
   return (
@@ -59,11 +59,7 @@ const LoginForm = () => {
         <Link to="/signup">Don't have an account?</Link>
       </Auth.ActionsWrapper>
       <Form.Item noStyle>
-        <Auth.SubmitButton
-          type="primary"
-          htmlType="submit"
-          loading={isLoading}
-        >
+        <Auth.SubmitButton type="primary" htmlType="submit" loading={isLoading}>
           Log in {""}
         </Auth.SubmitButton>
       </Form.Item>

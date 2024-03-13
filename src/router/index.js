@@ -4,9 +4,6 @@ import Loading from '../components/Loading';
 
 
 const Home = Loading(lazy(()=>import('../page/home')));
-const Login = Loading(lazy(() => import("../page/login")));
-const SignUp =Loading(lazy(()=>import('../page/signup')));
-
 const NotFoundPage = Loading(lazy(()=>import('../page/Error/NotFound')))
 
 const RouterDom = () => {
@@ -14,9 +11,6 @@ const RouterDom = () => {
     <>
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
-
           <Route path='*' element={<NotFoundPage/>} />
         </Routes>
     </>

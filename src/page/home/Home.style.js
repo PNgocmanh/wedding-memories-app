@@ -49,17 +49,24 @@ export const BoxIntroduceTitle = styled.div`
 export const BoxIntroduceBody = styled.div`
   width: 100%;
   height: auto;
-  background: #f3f2ef;
+  /* background: #f3f2ef; */
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 50px 0px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 export const IntroImage = styled.img`
   max-width: 500px;
   height: auto;
+  @media screen and (max-width: 600px) {
+    max-width: 350px;
+  }
 `;
 
 export const BrideImage = styled.img`
@@ -67,19 +74,22 @@ export const BrideImage = styled.img`
   height: auto;
 `;
 
-export const BrideName = styled.p`
-  font-size: 30px;
+export const BrideName = styled.h3`
+  font-size: 2.3rem;
+  font-weight: 600px;
   text-align: center;
   color: #4b7293;
   margin: 0px 0px 0px 0px;
   font-family: "Bonheur Royale", cursive;
 `;
 
-export const GroomName = styled.p`
+export const GroomName = styled.h3`
   text-align: center;
-  font-size: 30px;
+  font-size: 2.3rem;
+  font-weight: 600px;
   color: #4b7293;
-  
+  margin: 0px;
+  font-family: "Bonheur Royale", cursive;
 `;
 
 export const GroomImage = styled.img`
@@ -104,13 +114,14 @@ export const ContentTitleWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: gray;
+  background: #edf3f8;
 `;
 
 export const ContentBodyWrapper = styled.div`
   width: 100%;
   /* height: 100px; */
   text-align: center;
+  margin-top: 20px;
   display: inline-block;
 `;
 
@@ -139,3 +150,9 @@ export const AlbumBodyWrapper = styled.div`
     margin: 0px 8px;
   }
 `;
+
+export const TextTitle = styled.h2`
+  font-size: 40px;
+  line-height: 55px;
+  font-family: 'Splash', cursive;
+`

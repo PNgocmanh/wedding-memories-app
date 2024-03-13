@@ -14,7 +14,7 @@ export default function Letter({ content, position }) {
         <Avatar
           shape="square"
           style={{ width: "100%", height: "auto" }}
-          src={img}
+          src={content.image}
         />
         <S.ImageBoxBorder />
       </S.BoxImage>
@@ -30,21 +30,11 @@ export default function Letter({ content, position }) {
       <S.BoxContent>
         <S.BoxTitle>
           <S.BoxTitleItem>
-            <Avatar shape="square" size={"large"} src={img} />
-          </S.BoxTitleItem>
-          <S.BoxTitleItem>
-            <h3>Username</h3>
+            <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
           </S.BoxTitleItem>
           <S.BoxTitleDay>05/03/2024</S.BoxTitleDay>
         </S.BoxTitle>
-        <S.BoxText>
-          Tôi đã từng không tin vào tình yêu online. Đã từng nghĩ làm sao có thể
-          thích một người chưa từng gặp mặt? Vậy mà giờ đây tôi lại đang như
-          vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu thật đấy!!! Ngày ấy vu
-          vơ đăng một dòng status trên facebook than thở, vu vơ đùa giỡn nói
-          chuyện với một người xa lạ chưa từng quen. Mà nào hay biết, 4 năm sau
-          người ấy lại là chồng mình.
-        </S.BoxText>
+        <S.BoxText>{content.content}</S.BoxText>
       </S.BoxContent>
     </>
   );
@@ -54,21 +44,11 @@ export default function Letter({ content, position }) {
       <S.BoxContent>
         <S.BoxTitle1>
           <S.BoxTitleItem1>
-            <h3>Username</h3>
-          </S.BoxTitleItem1>
-          <S.BoxTitleItem1>
-            <Avatar shape="square" size={"large"} src={img} />
+            <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
           </S.BoxTitleItem1>
           <S.BoxTitleDay1>05/03/2024</S.BoxTitleDay1>
         </S.BoxTitle1>
-        <S.BoxText1>
-          Tôi đã từng không tin vào tình yêu online. Đã từng nghĩ làm sao có thể
-          thích một người chưa từng gặp mặt? Vậy mà giờ đây tôi lại đang như
-          vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu thật đấy!!! Ngày ấy vu
-          vơ đăng một dòng status trên facebook than thở, vu vơ đùa giỡn nói
-          chuyện với một người xa lạ chưa từng quen. Mà nào hay biết, 4 năm sau
-          người ấy lại là chồng mình.
-        </S.BoxText1>
+        <S.BoxText1>{content.content}</S.BoxText1>
       </S.BoxContent>
       <S.BoxDivider>
         <S.DividerContent
@@ -83,7 +63,7 @@ export default function Letter({ content, position }) {
         <Avatar
           shape="square"
           style={{ width: "100%", height: "auto" }}
-          src={img}
+          src={content.image}
         />
         <S.ImageBoxBorder />
       </S.BoxImage>
@@ -97,10 +77,7 @@ export default function Letter({ content, position }) {
       <S.BoxContent>
         <S.BoxTitle1>
           <S.BoxTitleItem1>
-            <h3>Username</h3>
-          </S.BoxTitleItem1>
-          <S.BoxTitleItem1>
-            <Avatar shape="square" size={"large"} src={img} />
+            <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
           </S.BoxTitleItem1>
           <S.BoxTitleDay1>05/03/2024</S.BoxTitleDay1>
         </S.BoxTitle1>
@@ -111,14 +88,7 @@ export default function Letter({ content, position }) {
             alignItems: "center",
           }}
         >
-          <S.BoxTextMobile>
-            Tôi đã từng không tin vào tình yêu online. Đã từng nghĩ làm sao có
-            thể thích một người chưa từng gặp mặt? Vậy mà giờ đây tôi lại đang
-            như vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu thật đấy!!! Ngày
-            ấy vu vơ đăng một dòng status trên facebook than thở, vu vơ đùa giỡn
-            nói chuyện với một người xa lạ chưa từng quen. Mà nào hay biết, 4
-            năm sau người ấy lại là chồng mình.
-          </S.BoxTextMobile>
+          <S.BoxTextMobile>{content.content}</S.BoxTextMobile>
         </div>
       </S.BoxContent>
       <S.BoxDivider>
@@ -134,7 +104,7 @@ export default function Letter({ content, position }) {
         <Avatar
           shape="square"
           style={{ width: "100%", height: "auto" }}
-          src={img}
+          src={content.image}
         />
         <S.ImageBoxBorder />
       </S.BoxImage>

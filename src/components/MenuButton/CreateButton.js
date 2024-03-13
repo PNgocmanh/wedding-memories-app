@@ -1,65 +1,22 @@
 import { PlusCircleOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Popover,
-  Modal,
-  Form,
-  Input,
-  Space,
-  Upload,
-  message,
-} from "antd";
-import { useEffect, useRef, useState } from "react";
+import { Button, Popover, Modal, Form, Input, Space, message } from "antd";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as S from "./Menu.style";
 import { SmileOutlined } from "@ant-design/icons";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import ImgCrop from "antd-img-crop";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { ErrorMessage, Formik } from "formik";
+import UploadBanner from "./UploadImage";
+import { UploadImage } from "../../services/uploadService";
+import { memoryService } from "../../services/postService";
 
-const getBase64ForPreView = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-  // return isJpgOrPng;
-};
-
-export default function CreateButton() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [form] = Form.useForm();
+export default function CreateButton({ reload, setReload }) {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [content, setContent] = useState("");
-
-  const [image, setImage] = useState([]);
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const handleCancelPreview = () => setPreviewOpen(false);
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64ForPreView(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-    setPreviewOpen(true);
-  };
-  const handleChangePreview = ({ fileList: newFileList }) =>
-    setImage(newFileList);
 
   const uploadButton = (
     <button
@@ -94,40 +51,16 @@ export default function CreateButton() {
     setVisible(false);
   };
 
-  const handleCreate = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setLoading(false);
-      console.log("Create post");
-    }, 2000);
+  const handleCancelForm = (values) => {
+    values.name = "";
+    values.image = null;
+    values.content = "";
+    setVisible(false);
   };
 
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
-
-  const handleRemove = ({ fileList: newFileList }) => setImage([]);
-
-  const handleConvertPreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64ForPreView(file.originFileObj);
-    }
-  };
-
-  const customItemRender = (originNode, file, fileList) => {
-    handleConvertPreview(file);
-    return (
-      <div key={file.uid}>
-        <img
-          src={file.preview}
-          alt="preview"
-          style={{ width: "100%", height: "auto" }}
-        />
-        {originNode}
-      </div>
-    );
-  };
+  // useEffect(() => {
+  //   console.log(content);
+  // }, [content]);
 
   return (
     <>
@@ -143,100 +76,148 @@ export default function CreateButton() {
       <Modal
         title="Send memories"
         open={visible}
-        onOk={handleCreate}
+        style={{ top: 20 }}
         onCancel={handleCancel}
         maskClosable={false} // Prevents closing on outside click
         footer={null}
       >
-        <Form
-          form={form}
-          name="basic"
-          layout="vertical"
-          onFinish={handleCreate}
-        >
-          <Form.Item
-            name="upload"
-            label={<S.LabelHeading>Upload Image</S.LabelHeading>}
-            rules={[{ required: true, message: "This field is required!" }]}
-          >
-            <ImgCrop rotationSlider showReset showGrid aspect={4 / 3}>
-              <Upload
-                action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-                listType="picture"
-                name="avatar"
-                onPreview={handlePreview}
-                onChange={handleChangePreview}
-                // beforeUpload={beforeUpload}
-                // itemRender={customItemRender}
-              >
-                {image.length >= 1 ? null : uploadButton}
-              </Upload>
-            </ImgCrop>
+        <Formik
+          initialValues={{
+            name: "",
+            image: null,
+            content: "",
+          }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.name) errors.name = "Please enter your name";
+            if (!values.content) errors.content = "Please write something!";
+            if (!values.image) errors.image = "Please upload an image.";
+            return errors;
+          }}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log("Received values of form: ", values);
+            setSubmitting(true);
+            const body = {
+              userName: values.name,
+              image: values.image,
+              content: values.content,
+            };
 
-            <Modal
-              open={previewOpen}
-              title="Your Image"
-              footer={null}
-              onCancel={handleCancelPreview}
-            >
-              <img
-                alt="example"
-                style={{
-                  width: "100%",
-                }}
-                src={previewImage}
-              />
-            </Modal>
-          </Form.Item>
-          <Form.Item
-            name="content"
-            label={<S.LabelHeading>Content</S.LabelHeading>}
-            rules={[{ required: true, message: "This field is required!" }]}
-          >
-            <div>
-              <Input.TextArea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Nhập văn bản..."
-                autoSize={{ minRows: 3, maxRows: 5 }}
-              />
-              <Popover
-                placement="top"
-                trigger="click"
-                content={
-                  <>
-                    <S.EmojiWrapper>
-                      <Picker
-                        data={data}
-                        theme="light"
-                        previewPosition="none"
-                        onEmojiSelect={handleAddIcon}
-                      />
-                    </S.EmojiWrapper>
-                  </>
-                }
-              >
-                <Button
-                  style={{ marginTop: "10px" }}
-                  icon={<SmileOutlined />}
-                ></Button>
-                {" Add Emoji"}
-              </Popover>
-            </div>
-          </Form.Item>
-          <S.ButtonWrapper>
-            <Form.Item noStyle>
-              <Space>
-                <Button danger onClick={handleCancel}>
-                  Cancel
-                </Button>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                  Create
-                </Button>
-              </Space>
-            </Form.Item>
-          </S.ButtonWrapper>
-        </Form>
+            await UploadImage(body.image)
+              .then(async (res) => {
+                body.image = res.data.url;
+                await memoryService.createMemory(body).then((result) => {
+                  message.success(`Tạo kỷ niệm thành công`);
+                  setReload(!reload);
+                });
+              })
+              .catch((error) => {
+                console.log("Fail: ", error);
+                message.error("Tạo thất bại, vui lòng thử lại!");
+              })
+              .finally(() => {
+                setSubmitting(false);
+                setVisible(false);
+              });
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            setFieldValue,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <S.InputLabel htmlFor="name">Name</S.InputLabel>
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={values.name}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  style={{ margin: "3px 0px" }}
+                />
+                <ErrorMessage
+                  name="name"
+                  component={"div"}
+                  style={{ color: "red" }}
+                />
+              </div>
+              <div>
+                <S.InputLabel>Tải hình ảnh</S.InputLabel>
+                <UploadBanner
+                  uploadFile={values.image}
+                  setUploadFile={setFieldValue}
+                />
+                <ErrorMessage
+                  name="image"
+                  component={"div"}
+                  style={{ color: "red" }}
+                />
+              </div>
+              <div>
+                <S.InputLabel htmlFor="content">Content</S.InputLabel>
+                <Input.TextArea
+                  name="content"
+                  value={values.content}
+                  onChange={handleChange}
+                  placeholder="Nhập văn bản..."
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+                <ErrorMessage
+                  name="content"
+                  component={"div"}
+                  style={{ color: "red" }}
+                />
+                <Popover
+                  placement="top"
+                  trigger="click"
+                  content={
+                    <>
+                      <S.EmojiWrapper>
+                        <Picker
+                          data={data}
+                          theme="light"
+                          previewPosition="none"
+                          onEmojiSelect={handleAddIcon}
+                        />
+                      </S.EmojiWrapper>
+                    </>
+                  }
+                >
+                  <Button
+                    style={{ marginTop: "10px" }}
+                    icon={<SmileOutlined />}
+                  ></Button>
+                  {" Add Emoji"}
+                </Popover>
+              </div>
+
+              <S.ButtonWrapper>
+                <Form.Item noStyle>
+                  <Space>
+                    <Button danger onClick={() => handleCancelForm(values)}>
+                      Cancel
+                    </Button>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      loading={isSubmitting}
+                    >
+                      Create
+                    </Button>
+                  </Space>
+                </Form.Item>
+              </S.ButtonWrapper>
+            </form>
+          )}
+        </Formik>
       </Modal>
     </>
   );

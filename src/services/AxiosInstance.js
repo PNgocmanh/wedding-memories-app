@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://hcm23net03gr01-001-site1.htempurl.com/api";
+const url = "https://6597b33e668d248edf233783.mockapi.io/app/v1";
 
 const AxiosInstance = axios.create({
   baseURL: url,

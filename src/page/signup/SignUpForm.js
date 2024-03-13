@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Auth from "./SignUp.styles";
 import { Link } from "react-router-dom";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { message, Upload, Modal } from "antd";
 import ImgCrop from "antd-img-crop";
+import { register } from "../../redux/actions/userAction";
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
+const normFile = (e) => {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e?.fileList;
 };
 
 const getBase64ForPreView = (file) =>
@@ -40,16 +42,20 @@ const SignUpForm = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // const isLoading = useSelector((state) => state.user.isLoading);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [imageUrl, setImageUrl] = useState();
   const [loading, setLoading] = useState(false);
   const [fileList, setFileList] = useState([]);
+
   const handleCancel = () => setPreviewOpen(false);
+
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64ForPreView(file.originFileObj);
@@ -58,20 +64,9 @@ const SignUpForm = () => {
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
   };
-  // const handleChange = (info) => {
-  //   if (info.file.status === 'uploading') {
-  //     setLoading(true);
-  //     return;
-  //   }
-  //   if (info.file.status === 'done') {
-  //     // Get this url from response in real world.
-  //     getBase64(info.file.originFileObj, (url) => {
-  //       setImageUrl(url);
-  //       setLoading(false);
-  //     });
-  //   }
-  // };
+
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+
   const uploadButton = (
     <button
       style={{
@@ -96,6 +91,7 @@ const SignUpForm = () => {
   const onFinish = (values) => {
     setIsLoading(true);
     console.log("Received values of form: ", values);
+    // dispatch(register(values, navigate))
   };
 
   return (
@@ -139,33 +135,29 @@ const SignUpForm = () => {
         />
       </Form.Item>
       <Form.Item
-      name="image"
+        name="avatar"
         label={<Auth.LabelHeading>Avatar</Auth.LabelHeading>}
+        valuePropName="fileList"
+        getValueFromEvent={(e) => {
+          if (Array.isArray(e)) {
+            return e;
+          }
+          return e && e.fileList;
+        }}
         rules={[{ required: true, message: "This field is required!" }]}
       >
         <ImgCrop rotationSlider showReset showGrid>
           <Upload
             action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+            // action="https://api.cloudinary.com/v1_1/dbd0yztdb/image/upload"
             listType="picture-card"
-            name="avatar"
-            fileList={fileList}
-            // showUploadList={false}
+            // fileList={fileList}
+            maxCount={1}
             onPreview={handlePreview}
-            onChange={handleChange}
-            beforeUpload={beforeUpload}
+            // onChange={handleChange}
+            // beforeUpload={beforeUpload}
           >
             {fileList.length >= 1 ? null : uploadButton}
-            {/* {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt="avatar"
-                style={{
-                  width: "100%",
-                }}
-              />
-            ) : (
-              uploadButton
-            )} */}
           </Upload>
         </ImgCrop>
         <Modal
