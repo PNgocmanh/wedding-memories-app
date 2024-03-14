@@ -1,16 +1,5 @@
-import { FONT_SIZE, FONT_WEIGHT, media } from "../../constants/theme";
-import styled, { css } from "styled-components";
-import {
-  Button,
-  Card,
-  Checkbox,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Typography,
-} from "antd";
-import { LeftOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+import { Divider } from "antd";
 
 export const Container = styled.div`
   width: 100%;
@@ -18,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   @media screen and (max-width: 600px) {
     flex-direction: column;
   }
@@ -71,28 +60,31 @@ export const BoxTitle = styled.div`
   margin-top: 30px;
   margin-left: 20px;
   margin-bottom: 15px;
-  `;
+`;
 
 export const BoxTitleItem = styled.div`
   display: inline-block;
   margin-right: 15px;
-  font-family: 'Shantell Sans', cursive;
+  font-family: "Shantell Sans", cursive;
 `;
 
 export const BoxTitleItem1 = styled.div`
   display: inline-block;
   margin-left: 15px;
-  font-family: 'Shantell Sans', cursive;
+  font-family: "Shantell Sans", cursive;
 `;
 
 export const BoxTitleDay = styled.div`
   font-size: 14px;
   color: #6c7a89;
+  margin-top: -8px;
+  margin-bottom: 10px;
 `;
 export const BoxTitleDay1 = styled.div`
   font-size: 14px;
   color: #6c7a89;
-  /* margin-right: 20px; */
+  margin-top: -8px;
+  margin-bottom: 10px;
 `;
 
 export const BoxTitle1 = styled.div`

@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./Letter.style";
 import { Avatar, Divider, Typography } from "antd";
 import { useResponsive } from "../../hooks/useResponsive";
+import moment from "moment";
 
 export default function Letter({ content, position }) {
   const { isTablet, isDesktop } = useResponsive();
@@ -32,7 +33,7 @@ export default function Letter({ content, position }) {
           <S.BoxTitleItem>
             <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
           </S.BoxTitleItem>
-          <S.BoxTitleDay>05/03/2024</S.BoxTitleDay>
+          <S.BoxTitleDay>{moment(content.createdAt).format("DD/MM/YYYY")}</S.BoxTitleDay>
         </S.BoxTitle>
         <S.BoxText>{content.content}</S.BoxText>
       </S.BoxContent>
@@ -46,7 +47,7 @@ export default function Letter({ content, position }) {
           <S.BoxTitleItem1>
             <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
           </S.BoxTitleItem1>
-          <S.BoxTitleDay1>05/03/2024</S.BoxTitleDay1>
+          <S.BoxTitleDay1>{moment(content.createdAt).format("DD/MM/YYYY")}</S.BoxTitleDay1>
         </S.BoxTitle1>
         <S.BoxText1>{content.content}</S.BoxText1>
       </S.BoxContent>
@@ -79,7 +80,7 @@ export default function Letter({ content, position }) {
           <S.BoxTitleItem1>
             <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
           </S.BoxTitleItem1>
-          <S.BoxTitleDay1>05/03/2024</S.BoxTitleDay1>
+          <S.BoxTitleDay1>{moment(content.createdAt).format("DD/MM/YYYY")}</S.BoxTitleDay1>
         </S.BoxTitle1>
         <div
           style={{

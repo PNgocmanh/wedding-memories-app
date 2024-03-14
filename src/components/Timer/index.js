@@ -33,7 +33,8 @@ const CountdownTimer = () => {
       display: "flex",
       width: "100%",
       justifyContent: "center",
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      background: "white"
     }}>
       <div>
         <Statistic title="Days" value={countdown.days} />

@@ -1,8 +1,6 @@
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Popover, Modal, Form, Input, Space, message } from "antd";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import * as S from "./Menu.style";
 import { SmileOutlined } from "@ant-design/icons";
 import data from "@emoji-mart/data";
@@ -169,13 +167,14 @@ export default function CreateButton({ reload, setReload }) {
                   onChange={handleChange}
                   placeholder="Nhập văn bản..."
                   autoSize={{ minRows: 3, maxRows: 5 }}
+                  maxLength={500}
                 />
                 <ErrorMessage
                   name="content"
                   component={"div"}
                   style={{ color: "red" }}
                 />
-                <Popover
+                {/* <Popover
                   placement="top"
                   trigger="click"
                   content={
@@ -196,7 +195,7 @@ export default function CreateButton({ reload, setReload }) {
                     icon={<SmileOutlined />}
                   ></Button>
                   {" Add Emoji"}
-                </Popover>
+                </Popover> */}
               </div>
 
               <S.ButtonWrapper>
