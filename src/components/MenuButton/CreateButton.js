@@ -159,7 +159,7 @@ export default function CreateButton({ reload, setReload }) {
                   style={{ color: "red" }}
                 />
               </div>
-              <div>
+              <div style={{ marginBottom: "20px" }}>
                 <S.InputLabel htmlFor="content">Content</S.InputLabel>
                 <Input.TextArea
                   name="content"
@@ -167,7 +167,7 @@ export default function CreateButton({ reload, setReload }) {
                   onChange={handleChange}
                   placeholder="Nhập văn bản..."
                   autoSize={{ minRows: 3, maxRows: 5 }}
-                  maxLength={500}
+                  maxLength={735}
                 />
                 <ErrorMessage
                   name="content"

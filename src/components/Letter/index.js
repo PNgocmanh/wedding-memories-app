@@ -31,11 +31,24 @@ export default function Letter({ content, position }) {
       <S.BoxContent>
         <S.BoxTitle>
           <S.BoxTitleItem>
-            <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
+            <h3 style={{ fontSize: "24px" }}>From {content.userName}</h3>
           </S.BoxTitleItem>
-          <S.BoxTitleDay>{moment(content.createdAt).format("DD/MM/YYYY")}</S.BoxTitleDay>
+          <S.BoxTitleDay>
+            {moment(content.createdAt).format("DD/MM/YYYY")}
+          </S.BoxTitleDay>
         </S.BoxTitle>
-        <S.BoxText>{content.content}</S.BoxText>
+        <S.BoxText>
+          <div
+            style={{
+              position: "relative",
+              maxHeight: "290px",
+              overflowY: "auto",
+              overflowX: "hidden",
+            }}
+          >
+            {content.content}
+          </div>
+        </S.BoxText>
       </S.BoxContent>
     </>
   );
@@ -45,11 +58,24 @@ export default function Letter({ content, position }) {
       <S.BoxContent>
         <S.BoxTitle1>
           <S.BoxTitleItem1>
-            <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
+            <h3 style={{ fontSize: "24px" }}>From {content.userName}</h3>
           </S.BoxTitleItem1>
-          <S.BoxTitleDay1>{moment(content.createdAt).format("DD/MM/YYYY")}</S.BoxTitleDay1>
+          <S.BoxTitleDay1>
+            {moment(content.createdAt).format("DD/MM/YYYY")}
+          </S.BoxTitleDay1>
         </S.BoxTitle1>
-        <S.BoxText1>{content.content}</S.BoxText1>
+        <S.BoxText1>
+          <div
+            style={{
+              position: "relative",
+              maxHeight: "290px",
+              overflowY: "auto",
+              overflowX: "hidden",
+            }}
+          >
+            {content.content}
+          </div>
+        </S.BoxText1>
       </S.BoxContent>
       <S.BoxDivider>
         <S.DividerContent
@@ -78,9 +104,11 @@ export default function Letter({ content, position }) {
       <S.BoxContent>
         <S.BoxTitle1>
           <S.BoxTitleItem1>
-            <h3 style={{ fontSize: '24px' }}>From {content.userName}</h3>
+            <h3 style={{ fontSize: "24px" }}>From {content.userName}</h3>
           </S.BoxTitleItem1>
-          <S.BoxTitleDay1>{moment(content.createdAt).format("DD/MM/YYYY")}</S.BoxTitleDay1>
+          <S.BoxTitleDay1>
+            {moment(content.createdAt).format("DD/MM/YYYY")}
+          </S.BoxTitleDay1>
         </S.BoxTitle1>
         <div
           style={{

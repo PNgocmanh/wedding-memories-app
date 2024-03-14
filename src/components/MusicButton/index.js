@@ -55,7 +55,7 @@ const MusicButton = ({ musicUrl }) => {
       <Button type="primary" shape="circle" size='large' onClick={togglePlay}>
         {isPlaying ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
       </Button>
-      <audio ref={audioRef} src={musicUrl[currentTrackIndex]} />
+      <audio ref={audioRef} src={musicUrl[currentTrackIndex]} autoPlay />
     </S.Container>
   );
 };

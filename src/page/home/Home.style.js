@@ -108,14 +108,20 @@ export const ContentWrapper = styled.div`
 
 export const ContentTitleWrapper = styled.div`
   width: 100%;
-  height: 100px;
+  height: auto;
   text-align: center;
   /* display: inline-block; */
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background: #edf3f8;
 `;
+
+export const ContentTitle = styled.h3`
+  font-size: 25px;
+  font-family: "Shantell Sans", cursive;
+`
 
 export const ContentBodyWrapper = styled.div`
   width: 100%;

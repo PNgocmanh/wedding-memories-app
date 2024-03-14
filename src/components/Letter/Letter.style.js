@@ -110,8 +110,9 @@ export const BoxText = styled.div`
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
-  width: 400px;
+  width: 450px;
   min-height: 80px;
+  max-height: 320px;
   text-align: left;
   padding: 20px;
   margin: 0px 50px;
@@ -138,13 +139,14 @@ export const BoxText1 = styled.div`
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
-  width: 400px;
+  width: 450px;
   min-height: 80px;
+  max-height: 320px;
   text-align: right;
   padding: 20px;
-  margin: 0px 50px;
+  margin: 0px 0px 0px 10px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-  &::after {
+  &::before {
     content: "";
     position: absolute;
     width: 0;
