@@ -32,6 +32,10 @@ export const SlideTitleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    margin-top: -270px;
+  }
 `;
 
 export const SlideTitle = styled.h2`
@@ -40,6 +44,9 @@ export const SlideTitle = styled.h2`
   color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
   margin-left: -15px;
+  @media screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const IconHeart = styled.i`

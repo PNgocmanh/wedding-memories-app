@@ -1,5 +1,5 @@
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Popover, Modal, Form, Input, Space, message } from "antd";
+import { Button, Popover, Modal, Form, Input, Space, message, Popconfirm } from "antd";
 import { useState } from "react";
 import * as S from "./Menu.style";
 import { SmileOutlined } from "@ant-design/icons";
@@ -56,21 +56,17 @@ export default function CreateButton({ reload, setReload }) {
     setVisible(false);
   };
 
-  // useEffect(() => {
-  //   console.log(content);
-  // }, [content]);
-
   return (
     <>
-      <Popover placement="left" content={"send  a new message"}>
-        <Button
-          type="primary"
-          shape="circle"
-          size="large"
-          icon={<PlusCircleOutlined />}
-          onClick={showModal}
-        ></Button>
-      </Popover>
+      {/* <Popover placement="left" content={"send  a new message"}>
+      </Popover> */}
+      <Button
+        type="primary"
+        shape="circle"
+        size="large"
+        icon={<PlusCircleOutlined />}
+        onClick={showModal}
+      ></Button>
       <Modal
         title="Send memories"
         open={visible}
@@ -201,9 +197,17 @@ export default function CreateButton({ reload, setReload }) {
               <S.ButtonWrapper>
                 <Form.Item noStyle>
                   <Space>
-                    <Button danger onClick={() => handleCancelForm(values)}>
+                    <Popconfirm
+                      title="Bạn có chắc muốn thoát?"
+                      okText="Có"
+                      cancelText="Không"
+                      onConfirm={()=>handleCancelForm(values)}
+                    >
+
+                    <Button danger>
                       Cancel
                     </Button>
+                    </Popconfirm>
                     <Button
                       type="primary"
                       htmlType="submit"
