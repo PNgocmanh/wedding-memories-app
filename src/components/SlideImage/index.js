@@ -18,7 +18,11 @@ const contentStyle = {
 
 const SliderImage = () => {
   return (
-    <div>
+    <div
+      style={{
+        position: "relative"
+      }}
+    >
       <S.SlideTitleWrapper>
         <S.SlideTitle>
           <span>Phước Uyên</span>

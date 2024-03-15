@@ -7,6 +7,7 @@ export const Container = styled.div`
   /* width: 100%; */
   /* height: 100vh; */
   position: fixed;
-  bottom: 60px; /* Khoảng cách với đáy màn hình */
-  left: 40px; /* Khoảng cách với phải màn hình */
+  z-index: 100;
+  bottom: 20px; /* Khoảng cách với đáy màn hình */
+  left: 20px; /* Khoảng cách với phải màn hình */
 `;

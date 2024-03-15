@@ -34,7 +34,7 @@ export const SlideTitleWrapper = styled.div`
   flex-direction: column;
   @media screen and (max-width: 600px) {
     width: 100%;
-    margin-top: -270px;
+    /* margin-left: -15px; */
   }
 `;
 

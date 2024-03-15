@@ -5,8 +5,9 @@ import { LeftOutlined } from "@ant-design/icons";
 
 export const Container = styled.div`
   position: fixed;
-  bottom: 60px; /* Khoảng cách với đáy màn hình */
-  right: 40px; /* Khoảng cách với phải màn hình */
+  z-index: 100;
+  bottom: 20px; /* Khoảng cách với đáy màn hình */
+  right: 20px; /* Khoảng cách với phải màn hình */
 `;
 
 export const MenuWrapper = styled.div`
