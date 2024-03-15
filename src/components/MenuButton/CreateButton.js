@@ -163,7 +163,7 @@ export default function CreateButton({ reload, setReload }) {
                   onChange={handleChange}
                   placeholder="Nhập văn bản..."
                   autoSize={{ minRows: 3, maxRows: 5 }}
-                  maxLength={735}
+                  // maxLength={735}
                 />
                 <ErrorMessage
                   name="content"
