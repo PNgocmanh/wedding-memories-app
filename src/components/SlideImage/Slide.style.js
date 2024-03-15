@@ -52,7 +52,10 @@ export const SlideTitle = styled.h2`
 export const IconHeart = styled.i`
   font-size: 3rem;
   color: #dfa09f;
-  margin: 0px 20px;
+  margin: 0px 12px;
+  @media screen and (max-width: 600px) {
+    font-size: 1.7rem;
+  }
 `;
 
 export const TextWeddingDay = styled.div`

@@ -1,7 +1,5 @@
 import { FONT_SIZE, FONT_WEIGHT, media } from "../../constants/theme";
-import styled, { css } from "styled-components";
-import { Button, Card, Checkbox, Form, Input, Row, Typography } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 export const Container = styled.div`
   position: fixed;

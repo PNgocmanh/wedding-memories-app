@@ -7,7 +7,7 @@ import * as S from './MusicBtn.style'
 const MusicButton = ({ musicUrl }) => {
   const audioRef = useRef(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const togglePlay = () => {
     if (isPlaying) {
